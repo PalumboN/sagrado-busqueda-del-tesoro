@@ -1,6 +1,7 @@
 _ = require('lodash')
 sha256 = require('sha256')
 config = require('./config')
+pistas = require('./pistas')
 express = require('express')
 {Jugador} = require('./schemas')
 bodyParser = require('body-parser')
@@ -13,6 +14,7 @@ app.use bodyParser.urlencoded(extended: true)
 app.post '/jugadores', ({body: jugador}, res) ->
   { nick, contraseña } = jugador
   jugador.token = sha256(nick + contraseña)
+  jugador.pistas = pistas
   Jugador.create jugador
   .then -> res.status(201).end()
   .catch (err) -> res.status(400).send err
@@ -29,15 +31,17 @@ app.get '/pistas', ({query: {token}}, res) ->
   findJugador {token}
   .catch (err) -> invalidToken res
   .then (jugador) ->
-    res.send jugador.pistas
+    response = jugador.pistas.map (it) -> _.omit it.toJSON(), ["texto"]
+    res.send response
 
-app.get '/pistas/:nro', ({query: {token}, params: {nro}}, res) ->
+app.get '/pistas/:id', ({query: {token}, params: {id}}, res) ->
   findJugador {token}
   .catch (err) -> invalidToken res
   .then (jugador) ->
-    res.send jugador.pistas[nro].texto
+    res.send jugador.pistas[id-1].texto
   .catch (err) ->
     res.status(404).send "Pista no encontrada."
+
 
 app.get '/admin/jugadores', ({query: {token}}, res) ->
   return invalidToken res unless token is "alcal"

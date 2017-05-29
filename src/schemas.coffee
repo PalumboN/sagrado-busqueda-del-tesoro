@@ -20,8 +20,11 @@ Jugador = new Schema
     type: String
     required: true
   pistas: [
-    nro: Number
-    resuelta: Boolean
+    _id: false
+    id: Number
+    resuelta:
+      type: Boolean
+      default: false
     texto: String
   ]
 ,
