@@ -19,6 +19,11 @@ Jugador = new Schema
   token:
     type: String
     required: true
+  pistas: [
+    nro: Number
+    resuelta: Boolean
+    texto: String
+  ]
 ,
   versionKey: false
 
