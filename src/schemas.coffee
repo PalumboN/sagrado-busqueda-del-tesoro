@@ -19,7 +19,8 @@ Jugador = new Schema
   token:
     type: String
     required: true
-
+,
+  versionKey: false
 
 module.exports =
   Jugador: mongoose.model 'Jugador', Jugador
