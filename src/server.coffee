@@ -11,6 +11,9 @@ port = config.port
 
 app.use bodyParser.urlencoded(extended: true)
 
+app.get '/ping', (req, res) ->
+  res.send("pong")
+
 app.post '/jugadores', ({body: jugador}, res) ->
   { nick, contraseña } = jugador
   jugador.token = sha256(nick + contraseña)
