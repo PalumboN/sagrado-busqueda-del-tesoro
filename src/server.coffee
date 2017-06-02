@@ -89,7 +89,7 @@ app.get '/tesoro', ({query: {token}}, res) ->
 
 app.post '/tesoro', ({body: {codigo}}, res) ->
   if codigo == "AGUANTE WEB DINAMICAS DEL ALCAL"
-    res.send "¡GANASTE!"
+    res.send "¡GANASTE! https://drive.google.com/drive/folders/0B2cpfpeFNiIyb0s3QnJrc2g3NU0?usp=sharing"
   else
     res.status(400).send "Código incorrecto."
 
