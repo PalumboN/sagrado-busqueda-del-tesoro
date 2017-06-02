@@ -22,10 +22,10 @@ Jugador = new Schema
   pistas: [
     _id: false
     id: Number
-    resuelta:
+    bloqueada:
       type: Boolean
-      default: false
-    texto: String
+      default: true
+    codigo: String
   ]
 ,
   versionKey: false
